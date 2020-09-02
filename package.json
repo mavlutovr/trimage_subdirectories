@@ -1,0 +1,29 @@
+{
+  "name": "trimage_subdirectories",
+  "version": "0.0.1",
+  "description": "Compress many files by Trimage in subdirectories. File by file.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mavlutovr/trimage_subdirectories.git"
+  },
+  "keywords": [
+    "trimage",
+    "pack",
+    "many",
+    "files"
+  ],
+  "author": "Roman Mavlutov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mavlutovr/trimage_subdirectories/issues"
+  },
+  "homepage": "https://github.com/mavlutovr/trimage_subdirectories#readme",
+  "dependencies": {
+    "appdata": "^1.1.0",
+    "smoothstore": "^1.0.3"
+  }
+}
