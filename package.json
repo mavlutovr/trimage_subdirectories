@@ -24,6 +24,8 @@
   "homepage": "https://github.com/mavlutovr/trimage_subdirectories#readme",
   "dependencies": {
     "appdata": "^1.1.0",
+    "config": "^3.3.1",
+    "js-yaml": "^3.14.0",
     "smoothstore": "^1.0.3"
   }
 }
