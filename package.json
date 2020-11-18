@@ -26,6 +26,7 @@
     "appdata": "^1.1.0",
     "config": "^3.3.1",
     "js-yaml": "^3.14.0",
+    "prettysize": "^2.0.0",
     "smoothstore": "^1.0.3"
   }
 }
