@@ -145,7 +145,7 @@ const step = () => {
 
           data.set(filePathKey, filePath);
 
-          setTimeout(step, 100);
+          setTimeout(step, 0);
         }
       );
     }
