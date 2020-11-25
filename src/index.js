@@ -12,6 +12,12 @@ const { Datastore } = require('smoothstore');
 const data = new Datastore("TrimageSubdirectories");
 let stepN = 0;
 
+let numberOfRun = data.get('numberOfRun') || 0;
+numberOfRun ++;
+console.log('NUMBER_OF_RUN', numberOfRun);
+data.set('numberOfRun', numberOfRun);
+
+
 let compressedBytes = data.get('compressedBytes') || 0;
 
 
