@@ -113,7 +113,7 @@ const step = () => {
       || filePath.indexOf('.jpeg') !== -1) 
     {
       exec(
-        '/usr/bin/trimage -f ' + filePath,
+        'nice -n -10 /usr/bin/trimage -f ' + filePath,
         {
           timeout: 30*1000,
         },
