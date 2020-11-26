@@ -80,6 +80,7 @@ const getNextFilePath = (lastFilePath, prevFileName) => {
   do {
     if (prevFileName) {
       let currentIndex = items.indexOf(prevFileName);
+      console.log('items', items);
       newElement = items[currentIndex + 1];
 
       if (newElement) {
