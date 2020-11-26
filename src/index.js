@@ -162,7 +162,7 @@ const step = () => {
       stats = fs.statSync(filePath);
       let newSize = stats.size;
 
-      let percent = stdout.match(percentReg);
+      let percent = stdout.match(percentReg) || stderr.match(percentReg);
 
       console.log('stdout', stdout);
       console.log('percent', percent);
