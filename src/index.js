@@ -1,7 +1,10 @@
 
 const config = require('config'); // Config
 const fs = require('fs');
-const filePathKey = 'lastFilePath2';
+
+// Имя настройки, в которой хранится последний файл
+const filePathKey = 'lastFilePath3';
+
 const { exec } = require("child_process");
 const pretty = require('prettysize');
 
@@ -209,10 +212,10 @@ const step = () => {
     else if (filePath.indexOf('.jpg') !== -1
       || filePath.indexOf('.jpeg') !== -1) {
       
-      filePath = fs.realpathSync(filePath);
+      let realFilePath = fs.realpathSync(filePath);
 
       exec(
-        '/usr/bin/jpegoptim ' + filePath,
+        '/usr/bin/jpegoptim ' + realFilePath,
         {
           timeout: 30 * 1000,
         },
