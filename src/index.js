@@ -43,7 +43,9 @@ const getNextFilePath = (lastFilePath, prevFileName) => {
 
   // Search next file
   // let path = parsePath(lastFilePath);
-  prevFileName = prevFileName.replace(/~+$/, '');
+  if (prevFileName) {
+    prevFileName = prevFileName.replace(/~+$/, '');
+  }
 
   if (!fs.existsSync(lastFilePath)) {
     let path = parsePath(lastFilePath);
