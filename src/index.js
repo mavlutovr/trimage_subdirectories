@@ -89,7 +89,7 @@ const getNextFilePath = (lastFilePath, prevFileName) => {
 
       if (newElement) {
         try {
-          if (!/(\.png|\.jpg)$/.test(newElement)) {
+          if (/(\.png|\.jpg)/.test(newElement) && !/(\.png|\.jpg)$/.test(newElement)) {
             throw new Error('Strange file name: ' + newElement);
           }
 
