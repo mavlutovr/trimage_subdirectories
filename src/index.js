@@ -155,12 +155,81 @@ const step = () => {
     let stats = fs.statSync(filePath);
     let oldSize = stats.size;
 
-    if (filePath.indexOf('.png') !== -1 
+    const result = (percentReg, error, stdout, stderr) => {
+
+      stats = fs.statSync(filePath);
+      let newSize = stats.size;
+
+      let percent = stdout.match(percentReg);
+      if (percent) {
+        console.log(
+          'Compressed:     ',
+          pretty(oldSize), ' -->> ' + pretty(newSize),
+          '     ' + percent[1] + '%'
+        );
+      }
+      else {
+        if (error) console.error(error);
+        if (stderr) console.error(stderr);
+        console.log('stdout', stdout);
+      }
+
+      let delta = oldSize - newSize;
+      console.log('compressed file', pretty(delta));
+
+      compressedBytes += delta;
+
+      data.set('compressedBytes', compressedBytes);
+      console.log('compressed total', pretty(compressedBytes));
+
+
+      data.set(filePathKey, filePath);
+
+      setTimeout(step, 0);
+    };
+
+    // PNG
+    if (filePath.indexOf('.png') !== -1) {
+      exec(
+        '/usr/bin/optipng ' + filePath,
+        {
+          timeout: 30 * 1000,
+        },
+        (error, stdout, stderr) => {
+          result(
+            /([0-9\.]+)% decrease/,
+            error, stdout, stderr
+          );
+        }
+      );
+    }
+
+    // JPG
+    else if (filePath.indexOf('.jpg') !== -1
+      || filePath.indexOf('.jpeg') !== -1) {
+      
+      exec(
+        '/usr/bin/jpegoptim ' + filePath,
+        {
+          timeout: 30 * 1000,
+        },
+        (error, stdout, stderr) => {
+          //console.log('stdout', stdout);
+
+          result(
+            /\(([0-9\.]+)%\)/,
+            error, stdout, stderr
+          );
+        }
+      );
+    }
+
+    if (false && (filePath.indexOf('.png') !== -1 
       || filePath.indexOf('.jpg') !== -1 
-      || filePath.indexOf('.jpeg') !== -1) 
+      || filePath.indexOf('.jpeg') !== -1))
     {
       exec(
-        'unset DISPLAY XAUTHORITY && /usr/bin/trimage -f ' + filePath,
+        '/usr/bin/trimage -f ' + filePath,
         {
           timeout: 30*1000,
         },
