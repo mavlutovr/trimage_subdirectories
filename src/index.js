@@ -164,6 +164,7 @@ const step = () => {
 
       let percent = stdout.match(percentReg);
 
+      console.log('stdout', stdout);
       console.log('percent', percent);
 
       if (percent) {
