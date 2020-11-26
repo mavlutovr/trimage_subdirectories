@@ -89,6 +89,7 @@ const getNextFilePath = (lastFilePath, prevFileName) => {
 
       if (newElement) {
         try {
+          if (!/(\.png|\.jpg)/.test(newElement))  throw new Error('Strange file name');
           fs.statSync(lastFilePath + '/' + newElement);
           ok = true;
         }
