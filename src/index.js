@@ -100,6 +100,7 @@ const getNextFilePath = (lastFilePath, prevFileName) => {
   while (!ok)
 
   console.log('prevFileName', prevFileName);
+  console.log('newElement', newElement);
 
   // Есть следующий элемент
   if (newElement) {
