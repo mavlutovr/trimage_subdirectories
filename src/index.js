@@ -175,8 +175,8 @@ const step = () => {
         );
       }
       else {
-        if (error) console.error(error);
-        if (stderr) console.error(stderr);
+        if (error) console.error('error', error);
+        if (stderr) console.error('stderr', stderr);
         console.log('stdout', stdout);
       }
 
@@ -226,51 +226,6 @@ const step = () => {
             /\(([0-9\.]+)%\)/,
             error, stdout, stderr
           );
-        }
-      );
-    }
-
-    if (false && (filePath.indexOf('.png') !== -1 
-      || filePath.indexOf('.jpg') !== -1 
-      || filePath.indexOf('.jpeg') !== -1))
-    {
-      exec(
-        '/usr/bin/trimage -f ' + filePath,
-        {
-          timeout: 30*1000,
-        },
-        (error, stdout, stderr) => {
-          if (error) console.error(error);
-          if (stderr) console.error(stderr);
-          //console.log('stdout', stdout);
-
-          stats = fs.statSync(filePath);
-          let newSize = stats.size;
-
-          let percent = stdout.match(/Ratio: ([0-9\.]+)%/);
-          if (percent) {
-            console.log(
-              'Compressed:     ',
-              pretty(oldSize), ' -->> ' + pretty(newSize),
-              '     ' + percent[1] + '%'
-            );
-          }
-          else {
-            console.log('stdout', stdout);
-          }
-
-          let delta = oldSize - newSize;
-          console.log('compressed file', pretty(delta));
-
-          compressedBytes += delta;
-
-          data.set('compressedBytes', compressedBytes);
-          console.log('compressed total', pretty(compressedBytes));
-
-
-          data.set(filePathKey, filePath);
-
-          setTimeout(step, 0);
         }
       );
     }
