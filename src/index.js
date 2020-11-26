@@ -164,9 +164,6 @@ const step = () => {
 
       let percent = stdout.match(percentReg) || stderr.match(percentReg);
 
-      console.log('stdout', stdout);
-      console.log('percent', percent);
-
       if (percent) {
         console.log(
           'Compressed:     ',
@@ -214,6 +211,8 @@ const step = () => {
     else if (filePath.indexOf('.jpg') !== -1
       || filePath.indexOf('.jpeg') !== -1) {
       
+      filePath = fs.realpathSync(filePath);
+
       exec(
         '/usr/bin/jpegoptim ' + filePath,
         {
