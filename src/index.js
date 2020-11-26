@@ -83,6 +83,8 @@ const getNextFilePath = (lastFilePath, prevFileName) => {
       console.log('items -1', items[currentIndex - 1]);
       console.log('items 0', items[currentIndex]);
       console.log('items +1', items[currentIndex + 1]);
+      console.log('items +2', items[currentIndex + 2]);
+      console.log('items +3', items[currentIndex + 3]);
       newElement = items[currentIndex + 1];
 
       if (newElement) {
