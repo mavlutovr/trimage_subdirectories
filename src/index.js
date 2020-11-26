@@ -80,11 +80,11 @@ const getNextFilePath = (lastFilePath, prevFileName) => {
   do {
     if (prevFileName) {
       let currentIndex = items.indexOf(prevFileName);
-      console.log('items -1', items[currentIndex - 1]);
-      console.log('items 0', items[currentIndex]);
-      console.log('items +1', items[currentIndex + 1]);
-      console.log('items +2', items[currentIndex + 2]);
-      console.log('items +3', items[currentIndex + 3]);
+      // console.log('items -1', items[currentIndex - 1]);
+      // console.log('items 0', items[currentIndex]);
+      // console.log('items +1', items[currentIndex + 1]);
+      // console.log('items +2', items[currentIndex + 2]);
+      // console.log('items +3', items[currentIndex + 3]);
       newElement = items[currentIndex + 1];
 
       if (newElement) {
@@ -110,8 +110,8 @@ const getNextFilePath = (lastFilePath, prevFileName) => {
   }
   while (!ok)
 
-  console.log('prevFileName', prevFileName);
-  console.log('newElement', newElement);
+  // console.log('prevFileName', prevFileName);
+  // console.log('newElement', newElement);
 
   // Есть следующий элемент
   if (newElement) {
