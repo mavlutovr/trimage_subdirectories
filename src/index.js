@@ -86,6 +86,7 @@ const getNextFilePath = (lastFilePath, prevFileName) => {
           ok = true;
         }
         catch (e) {
+          console.error(e);
           prevFileName = newElement;
           console.error('NO FILE ', newElement);
         }
