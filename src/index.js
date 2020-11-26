@@ -157,10 +157,15 @@ const step = () => {
 
     const result = (percentReg, error, stdout, stderr) => {
 
+      console.log('percentReg', percentReg);
+
       stats = fs.statSync(filePath);
       let newSize = stats.size;
 
       let percent = stdout.match(percentReg);
+
+      console.log('percent', percent);
+
       if (percent) {
         console.log(
           'Compressed:     ',
@@ -185,7 +190,7 @@ const step = () => {
 
       data.set(filePathKey, filePath);
 
-      setTimeout(step, 0);
+      setTimeout(step, 1000);
     };
 
     // PNG
