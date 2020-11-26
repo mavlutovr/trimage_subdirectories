@@ -157,8 +157,6 @@ const step = () => {
 
     const result = (percentReg, error, stdout, stderr) => {
 
-      console.log('percentReg', percentReg);
-
       stats = fs.statSync(filePath);
       let newSize = stats.size;
 
@@ -188,7 +186,7 @@ const step = () => {
 
       data.set(filePathKey, filePath);
 
-      setTimeout(step, 1000);
+      setTimeout(step, 0);
     };
 
     // PNG
