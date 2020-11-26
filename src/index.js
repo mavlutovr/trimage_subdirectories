@@ -78,13 +78,15 @@ const getNextFilePath = (lastFilePath, prevFileName) => {
     if (prevFileName) {
       let currentIndex = items.indexOf(prevFileName);
       newElement = items[currentIndex + 1];
-      prevFileName = newElement;
-      if (prevFileName) {
+
+      if (newElement) {
         try {
-          fs.statSync(prevFileName);
+          fs.statSync(newElement);
           ok = true;
         }
-        catch (e) { }
+        catch (e) {
+          prevFileName = newElement;
+        }
       }
       else {
         ok = true;
