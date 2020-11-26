@@ -99,6 +99,8 @@ const getNextFilePath = (lastFilePath, prevFileName) => {
   }
   while (!ok)
 
+  console.log('prevFileName', prevFileName);
+
   // Есть следующий элемент
   if (newElement) {
     let newPath = lastFilePath + '/' + newElement;
