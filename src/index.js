@@ -9,10 +9,10 @@ const pretty = require('prettysize');
 // DB
 // https://www.npmjs.com/package/smoothstore
 const { Datastore } = require('smoothstore');
-const data = new Datastore("TrimageSubdirectories");
+const data = new Datastore("TrimageSubdirectories2");
 
 // Имя настройки, в которой хранится последний файл
-const filePathKey = data.get('lastFilePathKey');
+const filePathKey = config.lastFilePathKey;
 
 let stepN = 0;
 
@@ -84,11 +84,6 @@ const getNextFilePath = (lastFilePath, prevFileName) => {
   do {
     if (prevFileName) {
       let currentIndex = items.indexOf(prevFileName);
-      // console.log('items -1', items[currentIndex - 1]);
-      // console.log('items 0', items[currentIndex]);
-      // console.log('items +1', items[currentIndex + 1]);
-      // console.log('items +2', items[currentIndex + 2]);
-      // console.log('items +3', items[currentIndex + 3]);
       newElement = items[currentIndex + 1];
 
       if (newElement) {
@@ -174,6 +169,10 @@ const step = () => {
         );
       }
       else {
+        if (stderr.indexOf('JPEG decoding is not supported') !== -1) {
+          return runJpg();
+        }
+        
         if (error) console.error('error', error);
         if (stderr) console.error('stderr', stderr);
         console.log('stdout', stdout);
@@ -191,6 +190,25 @@ const step = () => {
       data.set(filePathKey, filePath);
 
       setTimeout(step, 0);
+    };
+
+    const runJpg = () => {
+      let realFilePath = fs.realpathSync(filePath);
+
+      exec(
+        '/usr/bin/jpegoptim ' + realFilePath,
+        {
+          timeout: 30 * 1000,
+        },
+        (error, stdout, stderr) => {
+          //console.log('stdout', stdout);
+
+          result(
+            /\(([0-9\.]+)%\)/,
+            error, stdout, stderr
+          );
+        }
+      );
     };
 
     // PNG
@@ -213,22 +231,7 @@ const step = () => {
     else if (filePath.indexOf('.jpg') !== -1
       || filePath.indexOf('.jpeg') !== -1) {
       
-      let realFilePath = fs.realpathSync(filePath);
-
-      exec(
-        '/usr/bin/jpegoptim ' + realFilePath,
-        {
-          timeout: 30 * 1000,
-        },
-        (error, stdout, stderr) => {
-          //console.log('stdout', stdout);
-
-          result(
-            /\(([0-9\.]+)%\)/,
-            error, stdout, stderr
-          );
-        }
-      );
+      runJpg();
     }
   }
 
