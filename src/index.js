@@ -180,6 +180,9 @@ const step = () => {
               '     ' + percent[1] + '%'
             );
           }
+          else {
+            console.log('stdout', stdout);
+          }
 
           let delta = oldSize - newSize;
           console.log('compressed file', pretty(delta));
