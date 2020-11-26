@@ -172,7 +172,7 @@ const step = () => {
         if (stderr.indexOf('JPEG decoding is not supported') !== -1) {
           return runJpg();
         }
-        
+
         if (error) console.error('error', error);
         if (stderr) console.error('stderr', stderr);
         console.log('stdout', stdout);
@@ -196,7 +196,7 @@ const step = () => {
       let realFilePath = fs.realpathSync(filePath);
 
       exec(
-        '/usr/bin/jpegoptim ' + realFilePath,
+        '/usr/bin/jpegoptim --max=' + config.jpgquality + ' ' + realFilePath,
         {
           timeout: 30 * 1000,
         },
