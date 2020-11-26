@@ -165,8 +165,8 @@ const step = () => {
           timeout: 30*1000,
         },
         (error, stdout, stderr) => {
-          // if (error) console.error(error);
-          // if (stderr) console.error(stderr);
+          if (error) console.error(error);
+          if (stderr) console.error(stderr);
           //console.log('stdout', stdout);
 
           stats = fs.statSync(filePath);
