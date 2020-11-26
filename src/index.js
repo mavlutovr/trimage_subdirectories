@@ -41,6 +41,7 @@ const isDirectory = path => {
 
 const getNextFilePath = (lastFilePath, prevFileName) => {
 
+  if (prevFileName === '945,282,395946.png') prevFileName = '734,-489,396000.jpg';
   // Search next file
   // let path = parsePath(lastFilePath);
 
