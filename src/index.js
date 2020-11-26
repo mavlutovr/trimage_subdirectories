@@ -2,9 +2,6 @@
 const config = require('config'); // Config
 const fs = require('fs');
 
-// Имя настройки, в которой хранится последний файл
-const filePathKey = 'lastFilePath3';
-
 const { exec } = require("child_process");
 const pretty = require('prettysize');
 
@@ -13,6 +10,10 @@ const pretty = require('prettysize');
 // https://www.npmjs.com/package/smoothstore
 const { Datastore } = require('smoothstore');
 const data = new Datastore("TrimageSubdirectories");
+
+// Имя настройки, в которой хранится последний файл
+const filePathKey = data.get('lastFilePathKey');
+
 let stepN = 0;
 
 let numberOfRun = data.get('numberOfRun') || 0;
