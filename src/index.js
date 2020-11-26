@@ -82,7 +82,7 @@ const getNextFilePath = (lastFilePath, prevFileName) => {
 
       if (newElement) {
         try {
-          fs.statSync(newElement);
+          fs.statSync(lastFilePath + '/' + newElement);
           ok = true;
         }
         catch (e) {
