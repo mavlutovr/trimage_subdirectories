@@ -160,7 +160,7 @@ const step = () => {
       || filePath.indexOf('.jpeg') !== -1) 
     {
       exec(
-        '/usr/bin/trimage -f ' + filePath,
+        'unset DISPLAY XAUTHORITY && /usr/bin/trimage -f ' + filePath,
         {
           timeout: 30*1000,
         },
