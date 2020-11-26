@@ -73,17 +73,29 @@ const getNextFilePath = (lastFilePath, prevFileName) => {
   let newElement;
 
   // Тут сделано так, чтобы пропускать файлы с правами, к которым нет доступа
+  let ok = false;
   do {
     if (prevFileName) {
       let currentIndex = items.indexOf(prevFileName);
       newElement = items[currentIndex + 1];
       prevFileName = newElement;
+      if (prevFileName) {
+        try {
+          fs.statSync(prevFileName);
+          ok = true;
+        }
+        catch (e) { }
+      }
+      else {
+        ok = true;
+      }
     }
     else {
       newElement = items[0];
+      ok = true;
     }
   }
-  while (fs.existsSync(lastFilePath + '/' + newElement))
+  while (!ok)
 
   // Есть следующий элемент
   if (newElement) {
