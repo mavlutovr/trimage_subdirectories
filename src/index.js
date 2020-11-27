@@ -192,11 +192,16 @@ const step = () => {
       setTimeout(step, 0);
     };
 
-    const runJpg = () => {
+    const runJpg = quality => {
       let realFilePath = fs.realpathSync(filePath);
 
+      let qualityAgr = '';
+      if (quality) {
+        qualityAgr = '--max=' + quality + ' ';
+      }
+
       exec(
-        '/usr/bin/jpegoptim --max=' + config.jpgquality + ' ' + realFilePath,
+        '/usr/bin/jpegoptim ' + qualityAgr + realFilePath,
         {
           timeout: 30 * 1000,
         },
@@ -231,7 +236,7 @@ const step = () => {
     else if (filePath.indexOf('.jpg') !== -1
       || filePath.indexOf('.jpeg') !== -1) {
       
-      runJpg();
+      runJpg(config.jpgquality);
     }
   }
 
