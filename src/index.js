@@ -129,6 +129,7 @@ const getNextFilePath = (lastFilePath, prevFileName) => {
       }
     }
     catch(e) {
+      console.error(e);
       return getNextFilePath(newPath);
     }
   }
