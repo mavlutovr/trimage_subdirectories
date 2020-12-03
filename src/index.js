@@ -130,7 +130,8 @@ const getNextFilePath = (lastFilePath, prevFileName) => {
     }
     catch(e) {
       console.error(e);
-      return getNextFilePath(newPath);
+      let parent = parsePath(lastFilePath);
+      return getNextFilePath(parent.dir, parent.filename);
     }
   }
 
