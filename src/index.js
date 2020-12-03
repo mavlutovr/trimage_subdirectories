@@ -118,12 +118,18 @@ const getNextFilePath = (lastFilePath, prevFileName) => {
   // Есть следующий элемент
   if (newElement) {
     let newPath = lastFilePath + '/' + newElement;
-    if (isDirectory(newPath)) {
-      return getNextFilePath(newPath);
-    }
 
-    else {
-      return newPath;
+    try {
+      if (isDirectory(newPath)) {
+        return getNextFilePath(newPath);
+      }
+
+      else {
+        return newPath;
+      }
+    }
+    catch(e) {
+      return getNextFilePath(newPath);
     }
   }
 
