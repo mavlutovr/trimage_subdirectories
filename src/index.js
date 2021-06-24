@@ -9,14 +9,21 @@ const pretty = require('prettysize');
 // DB
 // https://www.npmjs.com/package/smoothstore
 const { Datastore } = require('smoothstore');
-const data = new Datastore("TrimageSubdirectories2");
+const data = new Datastore("TrimageSubdirectories2s");
 
 // Имя настройки, в которой хранится последний файл
 const filePathKey = config.lastFilePathKey;
 
 let stepN = 0;
 
-let numberOfRun = data.get('numberOfRun') || 0;
+let numberOfRun;
+try {
+  numberOfRun = data.get('numberOfRun');
+  numberOfRun = Number(numberOfRun);
+}
+catch (err) {
+  numberOfRun = 0;
+}
 numberOfRun ++;
 console.log('NUMBER_OF_RUN', numberOfRun);
 data.set('numberOfRun', numberOfRun);
